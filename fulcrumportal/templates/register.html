@@ -1,0 +1,93 @@
+{% extends "main.html" %}
+{% block content %}
+    <div class="container pt-4 col-lg-4">
+    <div class="card border-primary mb-3">
+        <div class="card-body">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Register</legend>
+                <div class="form-group">
+                    {{ form.fullName.label(class="form-control-label") }}
+                    {% if form.fullName.errors %}
+                        {{ form.fullName(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.fullName.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.fullName(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control") }}
+                    {% endif %}
+                </div> 
+                <div class="form-group">
+                    {{ form.business.label(class="form-control-label") }}
+                    {% if form.business.errors %}
+                        {{ form.business(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.business.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.business(class="form-control") }}
+                    {% endif %}
+                </div>
+                <!-- <div class="form-group border-bottom ">Choose One</div>
+                <div class="form-group">
+                        {% for subfield in form.user %}
+                            <tr>
+                                <td>{{ subfield }}</td>
+                                <td>{{ subfield.label(class="pr-4") }}</td>
+                            </tr>
+                        {% endfor %}
+                        <i class="fas fa-info-circle float-right pt-1"></i>
+                    </div>  -->
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

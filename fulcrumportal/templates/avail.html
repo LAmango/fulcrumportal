@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div class="container">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-top pt-4">Availability</legend>
+                <div class="form-group border-top pt-3">
+                    {{ form.name(class="form-control col-sm-4") }}
+                </div>
+                <div class="form-check-inline pull-left">
+                    <div class="form-check">
+                        {{ form.sunday(class="form-check-input") }}
+                        {{ form.sunday.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.monday(class="form-check-input") }}
+                        {{ form.monday.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.tuesday(class="form-check-input") }}
+                        {{ form.tuesday.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.wednesday(class="form-check-input") }}
+                        {{ form.wednesday.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.thursday(class="form-check-input") }}
+                        {{ form.thursday.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.friday(class="form-check-input") }}
+                        {{ form.friday.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.saturday(class="form-check-input") }}
+                        {{ form.saturday.label(class="form-check-label") }}
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
