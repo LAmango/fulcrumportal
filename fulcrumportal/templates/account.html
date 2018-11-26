@@ -1,0 +1,76 @@
+{% extends "main.html" %}
+{% block content %}
+    <div class="container pt-3">
+        <div class="card border-primary ">
+        <div class="card-header">{{ current_user.business_name }}</div>
+        <div class="card-body">
+            <h4 class="card-title"><img class="account-img rounded-circle" src="{{ image_file }}">{{ current_user.fullname }}</h4>
+            <p class="card-text">{{ current_user.email }}</p>
+            <!-- FORM -->
+            <div class="container pt-4">
+    <div>
+        <div class="card-body">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{ form.fullName.label(class="form-control-label") }}
+                    {% if form.fullName.errors %}
+                        {{ form.fullName(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.fullName.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.fullName(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.business.label(class="form-control-label") }}
+                    {% if form.business.errors %}
+                        {{ form.business(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.business.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.business(class="form-control") }}
+                    {% endif %}
+                </div>
+            <div>
+                {{ form.picture.label() }}
+                {{ form.picture(class="form-control-file") }}
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+        </div>
+    </div>
+    </div>
+{% endblock content %}

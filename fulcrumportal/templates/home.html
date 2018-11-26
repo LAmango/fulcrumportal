@@ -1,8 +1,38 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="container">
-  <form>
-          
-  </form>
-</div>
-{% endblock content%}
+    <div class="container pt-3">
+    {% for request in requests %}
+    <div class="card border-primary mb-3" style="color: #000;">
+      <div class="card-header"><h2 class="">{{ request.user_business }} - <small>{{ request.user_fullname }}</small></h2></div>
+      <div class="card-body">
+        <h4 class="card-title"><a href="{{ url_for('requests', request_id=request.id) }}">{{ request.request_title }}</a></h4>
+        <p class="card-text card-content">{{ request.request_body }}</p>
+      </div>
+    </div>
+    {% endfor %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Business</th>
+          <th scope="col"></th>
+          <th scope="col">Column heading</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Default</th>
+          <td>Column content</td>
+          <td>Column content</td>
+          <td>Column content</td>
+        </tr>
+        <tr class="table-primary">
+          <th scope="row">Primary</th>
+          <td>Column content</td>
+          <td>Column content</td>
+          <td>Column content</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+{% endblock content %}
