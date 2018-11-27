@@ -12,8 +12,9 @@ from flask_login import login_user, current_user, login_required, logout_user
 @app.route("/home")
 @login_required
 def home():
-    requests = Requests.query.all()
-    return render_template('home.html', Title='Home', requests=requests)
+    users = User.query.all()
+    #num_requests = Requests
+    return render_template('home.html', Title='Home', users=users, num_requests=1)
 
 
 @app.route("/login", methods=["GET", "POST"])
