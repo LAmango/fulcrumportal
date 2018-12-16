@@ -6,6 +6,7 @@ from fulcrumportal.forms import WeekDayAvail, RegistrationForm, LoginForm, Updat
 from fulcrumportal.models import User, Requests
 from fulcrumportal import app, db, bcrypt
 from flask_login import login_user, current_user, login_required, logout_user
+from flask_user import roles_required
 
 
 @app.route("/")
@@ -13,8 +14,14 @@ from flask_login import login_user, current_user, login_required, logout_user
 @login_required
 def home():
     users = User.query.all()
-    #num_requests = Requests
-    return render_template('home.html', Title='Home', users=users, num_requests=1)
+    requests = Requests.query.all()
+    return render_template('home.html', Title='Home', users=users, requests=requests)
+
+
+@app.route('/admin')
+@roles_required('Admin')
+def admin():
+    return "<h1>this is the admin page</h1>"
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -48,7 +55,7 @@ def register():
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(fullname=form.fullName.data, email=form.email.data.lower(), password=hashed_pw,
-                    business_name=form.business.data, role='admin')
+                    business_name=form.business.data)
         db.session.add(user)
         db.session.commit()
         flash(f'name: {form.fullName.data}, your account has been created!', 'success')

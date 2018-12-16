@@ -6,5 +6,7 @@
 }
 
 .card-content {
-  white-space: pre-line;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -1,18 +1,9 @@
-{% extends "main.html" %}
+{% extends "nav.html" %}
 {% block clients %}
     <div class="container pt-3">
-{#    {% for request in requests %}#}
-{#    <div class="card border-primary mb-3" style="color: #000;">#}
-{#      <div class="card-header"><h2 class="">{{ request.user_business }} - <small>{{ request.user_fullname }}</small></h2></div>#}
-{#      <div class="card-body">#}
-{#        <h4 class="card-title"><a href="{{ url_for('requests', request_id=request.id) }}">{{ request.request_title }}</a></h4>#}
-{#        <p class="card-text card-content">{{ request.request_body }}</p>#}
-{#      </div>#}
-{#    </div>#}
-{#    {% endfor %}#}
-    <table class="table table-hover table-striped" style="color: black">
+    <table class="table table-hover table-striped" {#style="color: black"#}>
       <thead>
-        <tr>
+        <tr class="table-dark">
           <th scope="col">#</th>
           <th scope="col">Business</th>
           <th scope="col">Client Name</th>
@@ -25,10 +16,23 @@
           <th scope="row">{{ loop.index }}</th>
           <td>{{ user.business_name }}</td>
           <td>{{ user.fullname }}</td>
-          <td>{{ user.requests|length }}</td>
+          <td><span class="badge badge-primary badge-pill center-text p-2">{{ user.requests|length }}</span></td>
         </tr>
       {% endfor %}
       </tbody>
     </table>
     </div>
 {% endblock clients %}
+{% block requests %}
+    <div class="container pt-3">
+        {% for request in requests %}
+        <div class="card border-light mb-3" {#style="color: #000;"#}>
+          <div class="card-header"><h4 class="">{{ request.user_business }} - <small>{{ request.user_fullname }}</small></h4></div>
+          <div class="card-body">
+            <h4 class="card-title"><a href="{{ url_for('requests', request_id=request.id) }}" class="text-primary">{{ request.request_title }}</a></h4>
+            <p class="card-text card-content">{{ request.request_body }}</p>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

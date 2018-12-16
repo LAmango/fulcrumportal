@@ -1,5 +1,5 @@
 from datetime import datetime
-from fulcrumportal import db, login_manager
+from fulcrumportal import db, login_manager, app
 from flask_login import UserMixin
 
 
@@ -10,16 +10,38 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(40), nullable=False)
+
+    # User Authentication fields
     email = db.Column(db.String(120), unique=True, nullable=False)
+    email_confirmed_at = db.Column(db.DateTime())
     password = db.Column(db.String(60), nullable=False)
+
+    # User fields
+    fullname = db.Column(db.String(40), nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     business_name = db.Column(db.String(80), nullable=False)
     requests = db.relationship('Requests', backref='business', lazy=True)
-    role = db.Column(db.String(10), nullable=False)
+    active = db.Column(db.Boolean(), default=True)
+
+    roles = db.relationship('Role', secondary='user_roles')
 
     def __repr__(self):
         return f"User('{self.fullname}', '{self.email}', '{self.image_file}')"
+
+
+# Define the Role data-model
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+
+
+# Define the UserRoles association table
+class UserRoles(db.Model):
+    __tablename__ = 'user_roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 
 class Requests(db.Model):
