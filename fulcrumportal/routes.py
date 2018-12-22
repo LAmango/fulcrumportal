@@ -130,6 +130,12 @@ def requests(request_id):
     return render_template('request.html', title=request2.request_title, request=request2)
 
 
+@app.route("/client/<int:user_id>")
+def client(user_id):
+    client = User.query.get_or_404(user_id)
+    return render_template('client.html', title=client.business_name, client=client)
+
+
 @app.route("/request/<int:request_id>/update", methods=["GET", "POST"])
 @login_required
 def update_request(request_id):

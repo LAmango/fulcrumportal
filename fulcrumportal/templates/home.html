@@ -5,7 +5,7 @@
       <thead>
         <tr class="table-dark">
           <th scope="col">#</th>
-          <th scope="col">Business</th>
+            <th scope="col">Business</th>
           <th scope="col">Client Name</th>
           <th scope="col">Requests</th>
         </tr>
@@ -14,7 +14,7 @@
       {% for user in users %}
         <tr>
           <th scope="row">{{ loop.index }}</th>
-          <td>{{ user.business_name }}</td>
+            <td><a href="{{ url_for("client", user_id=user.id) }}">{{ user.business_name }}</a></td>
           <td>{{ user.fullname }}</td>
           <td><span class="badge badge-primary badge-pill center-text p-2">{{ user.requests|length }}</span></td>
         </tr>
